@@ -12,7 +12,7 @@ resources:
 - name: "featured-image"
   src: "featured-image.jpg"
 
-tags: ["emoji"]
+tags: ["OMG GG XD"]
 categories: ["Markdown"]
 
 twemoji: false
