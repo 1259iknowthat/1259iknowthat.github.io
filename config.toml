@@ -2,7 +2,7 @@ baseURL = 'http://1259iknowthat.github.io/'
 languageCode = 'en-us'
 title = 'DFIR with Noob'
 theme = 'loveit'
-themesDir = "/themes"
+themesDir = "themes/"
 description = "asdjklasdjkl"
 
 defaultContentLanguage = "en"
