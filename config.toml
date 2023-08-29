@@ -2,8 +2,8 @@ baseURL = 'http://1259iknowthat.github.io/'
 languageCode = 'en-us'
 title = 'DFIR with Noob'
 theme = 'loveit'
-themesDir = "themes/"
-
+themesDir = "/themes"
+description = "asdjklasdjkl"
 
 defaultContentLanguage = "en"
 
@@ -12,33 +12,24 @@ languageName = "English"
 hasCJKLanguage = false
 
 # default amount of posts in each pages
-
 paginate = 12
-# google analytics code [UA-XXXXXXXX-X]
-
-googleAnalytics = ""
-# copyright description used only for seo schema
-
-copyright = ""
 
 # whether to use robots.txt
-
 enableRobotsTXT = true
+
 # whether to use git commit log
-
 enableGitInfo = true
-# whether to use emoji code
 
+# whether to use emoji code
 enableEmoji = true
 
 # ignore some build errors
-
 ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 # Author config
 
 [author]
-  name = "xxxx"
+  name = "1259iknowthat"
   email = ""
   link = ""
 
@@ -58,7 +49,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     url = "/posts/"
     # title will be shown when you hover on this menu link
     
-    title = ""
+    title = "OH NO GG"
   [[menu.main]]
     weight = 2
     identifier = "tags"
@@ -93,7 +84,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   dateFormat = "2006-01-02"
   # website title for Open Graph and Twitter Cards
   
-  title = "LoveIt"
+  title = "DFIR with Noob"
   # website description for RSS, SEO, Open Graph and Twitter Cards
   
   description = "Hugo theme - LoveIt"
@@ -186,7 +177,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   [params.app]
     # optional site title override for the app when added to an iOS home screen or Android launcher
     
-    title = "LoveIt"
+    title = "DFIR with Noob"
     # whether to omit favicon resource links
     
     noFavicon = false
