@@ -18,20 +18,15 @@ twemoji: false
 lightgallery: true
 ---
 
+A small misc challenge from CakeCTF 2022 🎂
+            
+<!--more-->
 
-<div class="warning" style="padding:0.1em; background-color:#1A1F35">
-    <span>
-        <p style="margin-top:1em; text-align:center">
-            <b><span style="color:#FFFFFF !important">Challenge's Description</span></b>
-        </p>
-        <p style="margin-left:1em; color:#FFFFFF">
-            nc misc.2022.cakectf.com 12022
-            readme2022_80ade97026adcb7e3e8f6203ad1eab06.tar.gz
-        </p>
-        <p style="margin-bottom:1em; margin-right:1em; text-align:right; font-family:Georgia; color:#FFFFFF">
-        </p>
-    </span>
-</div>
+{{< admonition >}}
+nc misc.2022.cakectf.com 12022
+
+readme2022_80ade97026adcb7e3e8f6203ad1eab06.tar.gz
+{{< /admonition >}}
 
 The challenge give us one compressed file and server to connect.
 
@@ -64,13 +59,13 @@ if __name__ == '__main__':
         exit("[-] Could not open file")
 ```
 
-As you can see, we must input the filepath to the remote server in order to get the flag, we can't use <font style="color:red">/</font> or <font style="color:red">..</font> symbol either. But I found something interesting: <font style="color:yellow">os.path.expanduser(</font><font style="color:green"><font style="color:yellow">filepath<font style="color:yellow"></font><font style="color:yellow">)</font>
+As you can see, we must input the filepath to the remote server in order to get the flag, we can't use <font style="color:red">/</font> or <font style="color:red">..</font> symbol either. But I found something interesting: <font style="color:red">os.path.expanduser(filepath)</font>
 
 "If you pass something like `~xxx/path/to/file`, \~xxx is expanded to the path of xxx's home directory. If you pass something like `~xxx/path/to/file`, \~xxx is expanded to the path of xxx's home directory." - Thanks to _**ptr-yudai**_. So I decided to look up passwd file by building up docker.
 
 ![Docker Environment](https://user-images.githubusercontent.com/89141562/188305576-fe067ec1-fd1f-4294-a8eb-0cd2075502d1.png)
 
-We will notice there's a line `sys:x:3:3:sys:/dev:/usr/sbin/nologin`. So we have the access to all file under /dev. Using `ls -la /dev`, I found this `lrwxrwxrwx 1 root root 13 Sep 4 08:09 fd -> /proc/self/fd`. So we will use file descriptor to get the flag.
+We will notice there's a line `sys:.../dev:/usr/sbin/nologin`. So we have the access to all file under /dev. Using `ls -la /dev`, I found this `lrwxrwxrwx 1 root root 13 Sep 4 08:09 fd -> /proc/self/fd`. So we will use file descriptor to get the flag.
 
 There's also a check function in server.py
 
@@ -88,4 +83,6 @@ Here is the result:
 
 ![](https://user-images.githubusercontent.com/89141562/188305587-de4f6df2-e9ae-4a44-b606-64ceffbbc894.png)
 
-<b><font style="color:greenyellow">FLAG: CakeCTF{~USER_r3f3rs_2_h0m3_d1r3ct0ry_0f_USER}</font></b>
+##### FLAG 
+
+**CakeCTF{~USER_r3f3rs_2_h0m3_d1r3ct0ry_0f_USER}**
