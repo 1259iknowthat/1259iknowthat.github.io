@@ -10,7 +10,7 @@ lightgallery: true
 
 ## ❓ Stupid things about me which may interesting for you.
 
-### I'm just a student who is interesting in DFIR.
+### I'm just a student who is interesting in DFIR. I'm also a Forensics/Misc player.
 
 * From University of Information Technology - Vietnam National University HCM 🎓
 * From [InsecLab](https://inseclab.uit.edu.vn/) with luv 😘
