@@ -4,8 +4,6 @@ title = 'DFIR with Noob'
 theme = 'loveit'
 themeDir = '../..'
 
-description = "asdjklasdjkl"
-
 defaultContentLanguage = "en"
 
 languageName = "English"
@@ -40,16 +38,16 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   [[menu.main]]
     weight = 1
     identifier = "posts"
+    
     # you can add extra information before the name (HTML format is supported), such as icons
-    
     pre = ""
-    # you can add extra information after the name (HTML format is supported), such as icons
     
+    # you can add extra information after the name (HTML format is supported), such as icons
     post = ""
     name = "Posts"
     url = "/posts/"
-    # title will be shown when you hover on this menu link
     
+    # title will be shown when you hover on this menu link
     title = ""
   [[menu.main]]
     weight = 2
@@ -72,153 +70,150 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # site default theme ["auto", "light", "dark"]
   
   defaultTheme = "auto"
+  
   # public git repo url only then enableGitInfo is true
-  
   gitRepo = "https://github.com/dillonzq/LoveIt"
-  # which hash function used for SRI, when empty, no SRI is used
-  # ["sha256", "sha384", "sha512", "md5"]
   
-  # ["sha256", "sha384", "sha512", "md5"]
-  fingerprint = ""
   # date format
-  
   dateFormat = "2006-01-02"
+  
   # website title for Open Graph and Twitter Cards
-  
   title = "DFIR with Noob"
+  
   # website description for RSS, SEO, Open Graph and Twitter Cards
-  
   description = "Hugo theme - LoveIt"
-  # website images for Open Graph and Twitter Cards
   
+  # website images for Open Graph and Twitter Cards
   images = ["/logo.png"]
+  
 
   # Header config
   
   [params.header]
+    
     # desktop header mode ["fixed", "normal", "auto"]
-    
     desktopMode = "fixed"
+    
     # mobile header mode ["fixed", "normal", "auto"]
-    
     mobileMode = "auto"
-    # Header title config
     
+    # Header title config
     [params.header.title]
-      # URL of the LOGO
 
+      # URL of the LOGO
       logo = ""
+      
       # title name
-      
       name = "DFIR with Noob"
+      
       # you can add extra information before the name (HTML format is supported), such as icons
-      
-      pre = "<i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i>"
+      pre = "<i class='far fa-solid fa-user-secret fa-fw' aria-hidden='true'></i>"
+
       # you can add extra information after the name (HTML format is supported), such as icons
-      
       post = ""
-      # whether to use typeit animation for title name
       
-      typeit = false
+      # whether to use typeit animation for title name
+      typeit = true
 
   # Footer config
   
   [params.footer]
     enable = true
+    
     # Custom content (HTML format is supported)
-    
     custom = ""
+    
     # whether to show Hugo and theme info
-    
     hugo = true
+    
     # whether to show copyright info
-    
     copyright = true
+    
     # whether to show the author
-    
     author = true
-    # site creation time
     
-    # since = 
-    # ICP info only in China (HTML format is supported)
-    # ICP 备案信息，仅在中国使用 (支持 HTML 格式)
-    icp = ""
+    # site creation time
+    since = 2023
+    
     # license info (HTML format is supported)
     # license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
 
   # Section (all posts) page config
-  # Section (所有文章) 页面配置
+
   [params.section]
+
     # special amount of posts in each section page
-    # section 页面每页显示文章数量
     paginate = 20
-    # date format (month and day)
     
+    # date format (month and day)
     dateFormat = "01-02"
+
     # amount of RSS pages
     # RSS 文章数目
     rss = 10
-
+  
   # List (category or tag) page config
-  # List (目录或标签) 页面配置
+  
   [params.list]
-    # special amount of posts in each list page
-    # list 页面每页显示文章数量
-    paginate = 20
-    # date format (month and day)
     
+    # special amount of posts in each list page
+    paginate = 20
+    
+    # date format (month and day)
     dateFormat = "01-02"
+
     # amount of RSS pages
     # RSS 文章数目
     rss = 10
-
+  
   # App icon config
   
   [params.app]
+    
     # optional site title override for the app when added to an iOS home screen or Android launcher
-    
     title = "DFIR with Noob"
+    
     # whether to omit favicon resource links
-    
     noFavicon = false
-    # modern SVG favicon to use in place of older style .png and .ico files
     
+    # modern SVG favicon to use in place of older style .png and .ico files
     svgFavicon = ""
+    
     # Android browser theme color
-    # Android 浏览器主题色
     themeColor = "#ffffff"
+    
     # Safari mask icon color
-    # Safari 图标颜色
     iconColor = "#5bbad5"
+    
     # Windows v8-11 tile color
-    # Windows v8-11 磁贴颜色
     tileColor = "#da532c"
 
   # Search config
   
   [params.search]
     enable = true
+    
     # type of search engine ["lunr", "algolia"]
-    
     type = "algolia"
+    
     # max index length of the chunked content
-    
     contentLength = 4000
+    
     # placeholder of the search bar
+    placeholder = "need sth?"
     
-    placeholder = ""
     # max number of results length
-    
     maxResultLength = 10
+    
     # snippet length of the result
-    
     snippetLength = 30
+    
     # HTML tag name of the highlight part in results
-    
     highlightTag = "em"
-    # whether to use the absolute URL based on the baseURL in search index
     
+    # whether to use the absolute URL based on the baseURL in search index
     absoluteURL = false
+
     [params.search.algolia]
       index = ""
       appID = ""
@@ -227,41 +222,43 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # Home page config
   
   [params.home]
+
     # amount of RSS pages
-    # RSS 文章数目
     rss = 10
+   
     # Home page profile
     
     [params.home.profile]
       enable = true
       # Gravatar Email for preferred avatar in home page
-      # Gravatar 邮箱，用于优先在主页显示的头像
       gravatarEmail = ""
+      
       # URL of avatar shown in home page
-      
       avatarURL = "/images/avatar.png"
+      
       # title shown in home page (HTML format is supported)
-      
       title = ""
+      
       # subtitle shown in home page (HTML format is supported)
-      
       subtitle = "Defend Smarter, Not Harder"
+      
       # whether to use typeit animation for subtitle
-      
       typeit = true
+      
       # whether to show social links
-      
       social = true
-      # disclaimer (HTML format is supported)
       
+      # disclaimer (HTML format is supported)
       disclaimer = ""
+    
     # Home page posts
     
     [params.home.posts]
       enable = true
-      # special amount of posts in each home posts page
       
+      # special amount of posts in each home posts page
       paginate = 6
+
   # Social config in home page
   
   [params.social]
@@ -271,96 +268,101 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # Page global config
   
   [params.page]
+    
     # whether to hide a page from home page
-    
     hiddenFromHomePage = false
+    
     # whether to hide a page from search results
-    
     hiddenFromSearch = false
+    
     # whether to enable twemoji
-    
     twemoji = false
+    
     # whether to enable lightgallery
-    
     lightgallery = false
+    
     # whether to enable the ruby extended syntax
-    
     ruby = true
+    
     # whether to enable the fraction extended syntax
-    
     fraction = true
+    
     # whether to enable the fontawesome extended syntax
-    
     fontawesome = true
+    
     # whether to show link to Raw Markdown content of the content
-    
     linkToMarkdown = true
-    # whether to show the full text content in RSS
     
+    # whether to show the full text content in RSS
     rssFullText = false
+    
     # Table of the contents config
     
     [params.page.toc]
+      
       # whether to enable the table of the contents
-      
       enable = true
+      
       # whether to keep the static table of the contents in front of the post
-      
       keepStatic = false
-      # whether to make the table of the contents in the sidebar automatically collapsed
       
+      # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
+    
     # Code config
     
     [params.page.code]
+      
       # whether to show the copy button of the code block
-      
       copy = true
-      # the maximum number of lines of displayed code by default
       
+      # the maximum number of lines of displayed code by default
       maxShownLines = 50
+
     # KaTeX mathematical formulas config (KaTeX https://katex.org/)
-    # KaTeX 数学公式配置 (KaTeX https://katex.org/)
+    
     [params.page.math]
       enable = false
-      # default inline delimiter is $ ... $ and \( ... \)
       
+      # default inline delimiter is $ ... $ and \( ... \)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
-      # default block delimiter is $$ ... $$, \[ ... \], \begin{equation} ... \end{equation} and some other functions
       
+      # default block delimiter is $$ ... $$, \[ ... \], \begin{equation} ... \end{equation} and some other functions
       blockLeftDelimiter = ""
       blockRightDelimiter = ""
+
       # KaTeX extension copy_tex
-      # KaTeX 插件 copy_tex
       copyTex = true
+
       # KaTeX extension mhchem
-      # KaTeX 插件 mhchem
       mhchem = true
+
     # Mapbox GL JS config (Mapbox GL JS https://docs.mapbox.com/mapbox-gl-js)
-    # Mapbox GL JS 配置 (Mapbox GL JS https://docs.mapbox.com/mapbox-gl-js)
+    
     [params.page.mapbox]
+      
       # access token of Mapbox GL JS
-      # Mapbox GL JS 的 access token
       accessToken = "pk.eyJ1IjoiZGlsbG9uenEiLCJhIjoiY2s2czd2M2x3MDA0NjNmcGxmcjVrZmc2cyJ9.aSjv2BNuZUfARvxRYjSVZQ"
+      
       # style for the light theme
-      
       lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true"
+      
       # style for the dark theme
-      
       darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true"
+      
       # whether to add NavigationControl (https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol)
-      
       navigation = true
+      
       # whether to add GeolocateControl (https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol)
-      
       geolocate = true
+      
       # whether to add ScaleControl (https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol)
-      
       scale = true
-      # whether to add FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
       
+      # whether to add FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
       fullscreen = true
+    
     # Social share links in post page
     
     [params.page.share]
@@ -388,27 +390,31 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       Skype = false
       Trello = false
       Mix = false
+    
     # Comment config
     
     [params.page.comment]
       enable = false
+
       # Disqus comment config (https://disqus.com/)
-      # Disqus 评论系统设置 (https://disqus.com/)
+      
       [params.page.comment.disqus]
         enable = false
+        
         # Disqus shortname to use Disqus in posts
-        # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
         shortname = ""
+      
       # Gitalk comment config (https://github.com/gitalk/gitalk)
-      # Gitalk 评论系统设置 (https://github.com/gitalk/gitalk)
+      
       [params.page.comment.gitalk]
         enable = false
         owner = ""
         repo = ""
         clientId = ""
         clientSecret = ""
+      
       # Valine comment config (https://github.com/xCss/Valine)
-      # Valine 评论系统设置 (https://github.com/xCss/Valine)
+      
       [params.page.comment.valine]
         enable = true
         appId = "QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI"
@@ -417,27 +423,24 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         avatar = "mp"
         meta= ""
         pageSize = 10
-        # automatically adapt the current theme i18n configuration when empty
         
+        # automatically adapt the current theme i18n configuration when empty
         lang = ""
         visitor = true
         recordIP = true
         highlight = true
         enableQQ = false
         serverURLs = "https://leancloud.hugoloveit.com"
+        
         # emoji data file name, default is "google.yml"
         # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
         # located in "themes/LoveIt/assets/lib/valine/emoji/" directory
         # you can store your own data files in the same path under your project:
         # "assets/lib/valine/emoji/"
-        # emoji 数据文件名称, 默认是 "google.yml"
-        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
-        
-        
-        # "assets/lib/valine/emoji/"
         emoji = ""
+      
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
-      # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
+      
       [params.page.comment.facebook]
         enable = false
         width = "100%"
@@ -446,8 +449,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         # automatically adapt the current theme i18n configuration when empty
         
         languageCode = ""
+      
       # Telegram comments config (https://comments.app/)
-      # Telegram comments 评论系统设置 (https://comments.app/)
+      
       [params.page.comment.telegram]
         enable = false
         siteID = ""
@@ -457,12 +461,14 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         colorful = true
         dislikes = false
         outlined = false
+      
       # Commento comment config (https://commento.io/)
-      # Commento comment 评论系统设置 (https://commento.io/)
+      
       [params.page.comment.commento]
         enable = false
+      
       # utterances comment config (https://utteranc.es/)
-      # utterances comment 评论系统设置 (https://utteranc.es/)
+      
       [params.page.comment.utterances]
         enable = false
         # owner/repo
@@ -471,18 +477,19 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+      
       # giscus comment config (https://giscus.app/)
-      # giscus comment 评论系统设置 (https://giscus.app/zh-CN)
+      
       [params.page.comment.giscus]
-        # You can refer to the official documentation of giscus to use the following configuration.
         
+        # You can refer to the official documentation of giscus to use the following configuration.
         enable = false
         repo = ""
         repoId = ""
         category = "Announcements"
         categoryId = ""
-        # automatically adapt the current theme i18n configuration when empty
         
+        # automatically adapt the current theme i18n configuration when empty
         lang = ""
         mapping = "pathname"
         reactionsEnabled = "1"
@@ -491,6 +498,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         lazyLoading = false
         lightTheme = "light"
         darkTheme = "dark"
+
     # Third-party library config
     
     [params.page.library]
@@ -504,32 +512,21 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         # located in "assets/" 位于 "assets/"
         # Or 或者
         # someJavascript = "https://cdn.example.com/some.js"
-    # Page SEO config
-    
-    [params.page.seo]
-      # image URL
-      
-      images = []
-      # Publisher info
-      
-      [params.page.seo.publisher]
-        name = "xxxx"
-        logoUrl = "/images/avatar.png"
 
   # TypeIt config
-  # TypeIt 配置
+
   [params.typeit]
+    
     # typing speed between each step (measured in milliseconds)
-    
     speed = 100
+    
     # blinking speed of the cursor (measured in milliseconds)
-    
     cursorSpeed = 1000
+    
     # character used for the cursor (HTML format is supported)
-    
     cursorChar = "|"
-    # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     
+    # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     duration = -1
 
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
@@ -541,16 +538,6 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     pinterest = ""
     baidu = ""
 
-  # Site SEO config
-  
-  [params.seo]
-    # image URL
-    
-    image = "/images/Apple-Devices-Preview.png"
-    # thumbnail URL
-    
-    thumbnailUrl = "/images/screenshot.png"
-
   # Analytics config
   
   [params.analytics]
@@ -558,26 +545,33 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # Google Analytics
     [params.analytics.google]
       id = ""
-      # whether to anonymize IP
       
+      # whether to anonymize IP
       anonymizeIP = true
+    
     # Fathom Analytics
+    
     [params.analytics.fathom]
       id = ""
-      # server url for your tracker if you're self hosting
       
+      # server url for your tracker if you're self hosting
       server = ""
+    
     # Plausible Analytics
+    
     [params.analytics.plausible]
       dataDomain = ""
+    
     # Yandex Metrica
+    
     [params.analytics.yandexMetrica]
       id = ""
 
   # Cookie consent config
-  # Cookie 许可配置
+
   [params.cookieconsent]
     enable = false
+   
     # text strings used for Cookie consent banner
     
     [params.cookieconsent.content]
@@ -593,11 +587,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # located in "themes/LoveIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
-    # CDN 数据文件名称, 默认不启用
-    # ["jsdelivr.yml"]
     
-    
-    # "assets/data/cdn/"
     data = "jsdelivr.yml"
 
   # Compatibility config
@@ -611,8 +601,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     objectFit = false
 
 # Markup related configuration in Hugo
-# Hugo 解析文档的配置
+
 [markup]
+  
   # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
   
   [markup.highlight]
@@ -620,11 +611,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     guessSyntax = true
     lineNos = true
     lineNumbersInTable = true
+    
     # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
-    # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
     noClasses = false
+  
   # Goldmark is from Hugo 0.60 the default library used for Markdown
-  # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
+  
   [markup.goldmark]
     [markup.goldmark.extensions]
       definitionList = true
@@ -635,11 +627,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       taskList = true
       typographer = true
     [markup.goldmark.renderer]
-      # whether to use HTML tags directly in the document
       
+      # whether to use HTML tags directly in the document
       unsafe = true
-  # Table Of Contents settings
   
+  # Table Of Contents settings
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 6
@@ -652,7 +644,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   priority = 0.5
 
 # Permalinks config (https://gohugo.io/content-management/urls/#permalinks)
-# Permalinks 配置 (https://gohugo.io/content-management/urls/#permalinks)
+
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
@@ -661,7 +653,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 [privacy]
   # privacy of the Google Analytics (replaced by params.analytics.google)
-  # Google Analytics 相关隐私 (被 params.analytics.google 替代)
+  
   [privacy.googleAnalytics]
     # ...
   [privacy.twitter]
