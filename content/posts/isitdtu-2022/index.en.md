@@ -9,7 +9,7 @@ description: "Full misc challenges write-ups from ISITDTU qualifier 2022 🚩"
 images: []
 resources:
 - name: "featured-image"
-  src: "featured-image.png"
+  src: "featured-image.jpg"
 
 tags: ["Misc"]
 categories: ["WriteUps"]
