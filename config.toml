@@ -734,12 +734,12 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         title = ""
       [[languages.en.menu.main]]
         weight = 6
-        identifier = "github"
-        pre = "<i class='fab fa-github fa-fw' aria-hidden='true'></i>"
+        identifier = "music"
+        pre = "<i class='fab fa-solid fa-music fa-fw' aria-hidden='true'></i>"
         post = ""
         name = ""
-        url = "https://github.com/dillonzq/LoveIt"
-        title = "GitHub"
+        url = "https://open.spotify.com/track/640cOeje6h9PHYEBNnlXFw?si=a065f42b6adf46ee"
+        title = "Music"
     [languages.en.params]
       [languages.en.params.search]
         enable = true
