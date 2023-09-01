@@ -32,7 +32,7 @@ PicoCTF has been one of the greatest cyber security platform for newbie in my op
 Every file gets a flag. The SOC analyst saw one image been sent back and forth between two people. They decided to investigate and found out that there was more than what meets the eye.
 {{< /admonition >}}
 
-![](images/writeups/pico/flag.png)
+{{< image src="images/writeups/pico/flag.png" caption="Flag is in here" >}}
 
 This chall is about embed file in a file. You can either use `binwalk` or some hex editors to extract the content of the file. The embed file is just a normal zip file, no password protected so you can unzip it easily.
 
@@ -68,7 +68,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 
 Once you have the content, just open it up.
 
-![](images/writeups/pico/flag1.png)
+{{< image src="images/writeups/pico/flag1.png" caption="Flag" >}}
 
 ##### FLAG: 
 
@@ -167,7 +167,7 @@ Take a look at the given files, they're just one pcap file and one pass-protecte
 
 {{< image src="/images/writeups/pico/image61.png" caption="Content" >}}
 
-![](images/writeups/pico/image41.png)
+{{< image src="images/writeups/pico/image41.png" caption="" >}}
 
 Let's analize the traffic. We have MDNS protocol and other sussy protocols which look like hex value. I decided to filter out the data field.
 
@@ -175,13 +175,13 @@ Let's analize the traffic. We have MDNS protocol and other sussy protocols which
 
 We have many duplicate packets contain the same data. Let's take a look at this packet:
 
-{{< image src="/images/writeups/pico/image14.png" caption="Wireshark Log" >}}
+{{< image src="/images/writeups/pico/image14.png" caption="Some text" >}}
 
 As you can see, all of the packet's fields are informations which are readable ASCII. That's why we have sus protocols look like hex values at the beginning because those ASCII texts has overwritten packet's fields.
 
 Continue follow the trafic then I found the base64 string, decode it and we have the first half of the flag.
 
-![](images/writeups/pico/image51.png)
+{{< image src="images/writeups/pico/image51.png" caption="Flag in base format" >}}
 
 
 ```
@@ -193,7 +193,7 @@ This is the secret: picoCTF{R34DING_LOKd_
 
 Use it to unzip the second file then we have full of the flag. Pretty easy, right?
 
-![](images/writeups/pico/image15.png)
+{{< image src="images/writeups/pico/image15.png" caption="Flag" >}}
 
 ##### FLAG: 
 
@@ -204,7 +204,7 @@ ____
 ## MSB
 
 {{< admonition >}}
-            This image passes LSB statistical analysis, but we can't help but think there must be something to the visual artifacts present in this image...
+This image passes LSB statistical analysis, but we can't help but think there must be something to the visual artifacts present in this image...
 {{< /admonition >}}
 
 {{< image src="/images/writeups/pico/Ninja-and-Prince-Genji-Ukiyoe-Utagawa-Kunisada.flag.png" caption="Challenge Image" >}}
@@ -226,7 +226,7 @@ Digits: 1 0 1 0 0 1 0 0
 
 And here are MSB and LSB:
 
-MSB -> 1 010010 0 <- LSB
+MSB -> <font style="color:red">1</font> 010010 <font style="color:red">0</font> <- LSB
 
 That's it!
 
@@ -238,13 +238,11 @@ What will happen to those values? RGB(A) use 8 bits for R, G and B. Each color h
 
 (R-value G-value B-value) -> Ex: (63 255 127) = (00111111 11111111 01111111)
 
-If you want to hide one character in this pixel by using LSB technique, for example it's '3' - 011, then it looks exactly like this:
+If you want to hide one character in this pixel by using LSB technique, for example it's 3 - 011, then it looks exactly like this:
 
-(00111110 11111111 01111111)
+(0011111<font style="color:red">0</font> 1111111<font style="color:red">1</font> 0111111<font style="color:red">1</font>)
 
-For MSB, just reverse the order of the digits when you hide, instead of using the right-most digit, you use the left-most digit.
-
-That's all.
+For MSB, just reverse the order of the digits when you hide, instead of using the right-most digit, you use the left-most digit. That's all.
 
 In this challenge, you can use either tools as CyberChef or develop your own script to extract the content.
 
@@ -270,7 +268,7 @@ Dang, another stegano challenge!
 
 Let's have a look at the bmp picture.
 
-![](images/writeups/pico/backup.bmp)
+{{< image src="images/writeups/pico/backup.bmp" caption="Challenge Image" >}}
 
 As you can see, bit planes of the picture is very noisy. I guess the picture has some file embed in it.
 
@@ -286,9 +284,9 @@ According to [BMP's wikipedia](https://en.wikipedia.org/wiki/BMP_file_format), w
 
 Pay attention to the Pixel Array field. We have hex values that representing RGB values (3 values for RGB, 4 for RGBA):
 
-![](images/writeups/pico/image13.png)
+{{< image src="images/writeups/pico/image13.png" caption="" >}}
 
-![](images/writeups/pico/image101.png)
+{{< image src="images/writeups/pico/image101.png" caption="" >}}
 
 Return back to our image. Can you see the unusual thing?
 
@@ -298,7 +296,7 @@ The bitmap data of the image follow this format: XX XX YY YY XX XX YY YY ...
 
 At that moment, I guessed XX was bitmap's value and YY was added value. Scroll back to the beginning, I noticed that those values contain `PK` - `50 4B` which is two first hex signatures of zip file.
 
-![](images/writeups/pico/image1.png)
+{{< image src="images/writeups/pico/image1.png" caption="Zip signature" >}}
 
 I decided to write a script extract the sussy thing out after cut of the header of the bmp file.
 
@@ -318,7 +316,7 @@ out.write(bytes.fromhex(data))
 
 Unzip the file, it said there're some trailling datas after the payload but it's ok, at least, it's not corrupted 😁.
 
-![](images/writeups/pico/image8.png)
+{{< image src="images/writeups/pico/image8.png" caption="File name in base64" >}}
 
 Open the file (if you decode the name of it by using base64, the result will be like this: frankenstein-test.txt)
 
@@ -340,7 +338,7 @@ What do we have here. Hmmm, brower history, log files, those sussy bmp images, s
 
 I jumped right in log files, they were all about League of Legends, but there is one sussy:
 
-![](images/writeups/pico/image4.png)
+{{< image src="images/writeups/pico/image4.png" caption="Chat log" >}}
 
 So we have the password for `steghide`, `openssl` command that use `key, IV and salt`. I decided to use these things on bmp files.
 
@@ -352,7 +350,7 @@ wrote extracted data to "les-mis.txt.enc".
 
 ┌─[Green_Onions🧅]-[📂/mnt/hgfs/Local-Lab/Workspace/pico2023/disk/home/yone/gallery]
 └─(0)💲openssl enc -aes-256-cbc -d -in les-mis.txt.enc -out les-mis.txt -K "58593a7522257f2a95cce9a68886ff78546784ad7db4473dbd91aecd9eefd508" -S "0f3fa17eeacd53a9" -iv "7a12fd4dc1898efcd997a1b9496e7591"
-(repeat this process with 2.bmp and 3.bmp)
+(repeat this process with 2.bmp and 3.bmp" caption="I'm really panik right now" >}}
 
 ┌─[Green_Onions🧅]-[📂/mnt/hgfs/Local-Lab/Workspace/pico2023/disk/home/yone/gallery]
 └─(0)💲cat les-mis.txt | grep pico
@@ -369,13 +367,13 @@ No interesting informations were extracted... Unfortunately 🥲
 
 But the last bmp file which is 7.bmp, we can't use the password to un-steg it. Let's take a look at the notes. Note 1.txt and 2.txt has strings like: chizazerite, guldulheen. Nothing interesting.
 
-![](images/writeups/pico/image5.png)
+{{< image src="images/writeups/pico/image5.png" caption="Strange phrase" >}}
 
 Hmmmm, look like the phrase `yasuoaatrox...` will be our steghide password but it was not completed.
 
 Then I move on the mails. One of them was talking about erasing sussy mail. I decided to have a look at deleted mails and found this.
 
-![](images/writeups/pico/image10.png)
+{{< image src="images/writeups/pico/image10.png" caption="Mails" >}}
 
 The mail contain a link. Open it up.
 
@@ -438,11 +436,11 @@ What do we do now?
 
 Suddenly, I noticed that 1.txt had some tralling data after it, it's slack data, containing binary string:
 
-![](images/writeups/pico/image2.png)
+{{< image src="images/writeups/pico/image2.png" caption="Binary string" >}}
 
-Look back at the browser history, the user had searched infos about encoding numbers. What has caught my eyes is: [https://www.wikiwand.com/en/Golden_ratio_base](https://www.wikiwand.com/en/Golden_ratio_base)
+Look back at the browser history, the user had searched infos about encoding numbers. What has caught my eyes is: [Link](https://www.wikiwand.com/en/Golden_ratio_base)
 
-![](images/writeups/pico/image.png)
+{{< image src="images/writeups/pico/image.png" caption="Browser history" >}}
 
 Follow that link, I found some informations that can be used to decode the above string. A script to decode the binary string:
 
