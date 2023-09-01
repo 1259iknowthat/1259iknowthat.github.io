@@ -1,8 +1,8 @@
 ---
 weight: 5
 title: "Discover injecting implant by using memory forensics technique - Project Redline"
-date: 2023-08-29T17:55:28+08:00
-lastmod: 2023-08-29T17:55:28+08:00
+date: 2023-07-17T17:55:28+08:00
+lastmod: 2023-07-17T17:55:28+08:00
 draft: false
 author: "1259iknowthat"
 description: "A Forensics challenge from HTB Business 2023"
@@ -26,7 +26,7 @@ A Forensics challenge from HTB Business 2023
 
 A few days ago, I had a chance to participating in HTB Business and play some forensics challenges. The event's always suprising me with it's scenarios, this time is no exception.
 
-![](images/writeups/redline-htb/chal.png)
+{{< image src="images/writeups/redline-htb/chal.png" caption="Challenge" >}}
 
 
 I've solved this challenge after the event LOL, quite disappointed 🥲.
@@ -35,13 +35,13 @@ I've solved this challenge after the event LOL, quite disappointed 🥲.
 
 We have two artifacts, one is a packet capture, another is a memory dump.
 
-![](images/writeups/redline-htb/dns.png)
+{{< image src="images/writeups/redline-htb/dns.png" caption="Wireshark Log" >}}
 
 The capture is full of DNS records so I guess this is some kind of DNS tunneling. Let's move on to the dump file.
 
 We have the RAM captured of the victim's machine which was infected with malware. Here we got some informations about the operating system:
 
-![](images/writeups/redline-htb/os.png)
+{{< image src="images/writeups/redline-htb/os.png" caption="Volatility info" >}}
 
 
 ## Identify the malware
@@ -269,7 +269,7 @@ Here are the files we need to dump out:
 
 The `data_1` file gave me a really interesting result:
 
-![](images/writeups/redline-htb/http.png)
+{{< image src="images/writeups/redline-htb/http.png" caption="Suspicious URLs" >}}
 
 
 These are extremely strange urls which has been accessed by the victim. I guess this is how the malware got into the machine because this is maybe a phishing website. Back to the existing files we caught in the memory, we got these:
@@ -289,11 +289,11 @@ These files were downloaded by this url: `http://get.video1an.org/vlc/3.0.18/win
 
 We can actually view it's hex values in the memory:
 
-![](images/writeups/redline-htb/hex1.png)
+{{< image src="images/writeups/redline-htb/hex1.png" caption="Zip values in dump" >}}
 
 But unfortunately, the zip was truncated so we can't recover it. The zip file also contains a suspicious file.
 
-![](images/writeups/redline-htb/hex2.png)
+{{< image src="images/writeups/redline-htb/hex2.png" caption="codex.dat" >}}
 
 `codex.dat` file disappeared in the memory, quite strange isn't it?
 
@@ -301,7 +301,7 @@ Back to three dlls remain in the dump, I think one of them is the malware. Let's
 
 Here we go:
 
-![](images/writeups/redline-htb/vt1.png)
+{{< image src="images/writeups/redline-htb/vt1.png" caption="VirusTotal's result" >}}
 
 
 Nice! Now we've known where the fun begins.
@@ -312,17 +312,17 @@ The dll was built by C/C++ so we need to use a disassembler like IDA to view it'
 
 We can start at the main function:
 
-![](images/writeups/redline-htb/ida1.png)
+{{< image src="images/writeups/redline-htb/ida1.png" caption="Malware's Main function" >}}
 
 On the other hand, I've got the real dll from the official VLC Media Player.
 
-![](images/writeups/redline-htb/ida2.png)
+{{< image src="images/writeups/redline-htb/ida2.png" caption="VLC valid function" >}}
 
 I think you've seen the difference.
 
 Jumping to `StartAddress` function, we got this:
 
-![](images/writeups/redline-htb/ida3.png)
+{{< image src="images/writeups/redline-htb/ida3.png" caption="Suspicious behaviour" >}}
 
 The dll load `codex.dat` file and then inject it to RuntimeBroker.exe process. Very cool! But, the file was not in the memory, how do we extract it? We've known that the payload/shellcode has been injected to RuntimeBroker process, so maybe the dump can catch it and we can extract it by dumping the process' memory.
 
@@ -389,51 +389,51 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 16176150      0xF6D416        mcrypt 2.2 encrypted data, algorithm: blowfish-448, mode: CBC, keymode: 4bit
 ```
 
-We got an executable at `0xB47` offset. Let's check it in hex view in case the binwalk can mismatch.
+We got an executable at `0xB47` offset. Let's check it in hex view in case the binwalk could be mismatched.
 
-![](images/writeups/redline-htb/hex3.png)
+{{< image src="images/writeups/redline-htb/hex3.png" caption="Hex values" >}}
 
 Okay... We do have an actual executable in this dump. And again, after extracting it, we upload to VirusTotal.
 
-![](images/writeups/redline-htb/vt2.png)
+{{< image src="images/writeups/redline-htb/vt2.png" caption="VirusTotal's result" >}}
 
 
 Seems like this is Sliver's implant. Now we move on to the final stage.
 
 ## Decode, Decrypt, Dedge
 
-We have known this is Sliver's implant so we can get its source code on github instead of reversing the whole binary 🥶: https://github.com/BishopFox/sliver
+We have known this is Sliver's implant so we can get its source code on [github](https://github.com/BishopFox/sliver) instead of reversing the whole binary 🥶.
 
-I also found this blog which is useful for us to decrypt the traffic: https://www.immersivelabs.com/blog/detecting-and-decrypting-sliver-c2-a-threat-hunters-guide/
+I also found this [blog](https://www.immersivelabs.com/blog/detecting-and-decrypting-sliver-c2-a-threat-hunters-guide/) which is useful for us to decrypt the traffic.
 
 
 ### Traffic
 
 Back to the packet capture, we have full of DNS records, many of them point to a suspicious domain - the attacker's domain.
 
-![](images/writeups/redline-htb/dns2.png)
+{{< image src="images/writeups/redline-htb/dns2.png" caption="DNS exfiltration" >}}
 
 Looking at the the DNS query's name, we can easily see the format of it: `<encoded_data>.v10.events.data.microsoftcloudservices.com`
 
 The encoded data seems like in baseXX format but we can't decode it, including base64, base32, base58 and so on. Turns out, the implant is using a different baseXX-encoding based on the original one. The above blog has mentioned this:
 
-![](images/writeups/redline-htb/blog1.png)
+{{< image src="images/writeups/redline-htb/blog1.png" caption="Different base encoding" >}}
 
 By looking at the source code, we can see that the implant does not stop at base32 and base58, but it also use it own base64 implementation.
 
-![](images/writeups/redline-htb/source1.png)
+{{< image src="images/writeups/redline-htb/source1.png" caption="Source code" >}}
 
 I think this is the update version of the blog's dictionaries:
 
-![](images/writeups/redline-htb/update.png)
+{{< image src="images/writeups/redline-htb/update.png" caption="Updated" >}}
 
-Mapping those characters back to the right one is not enough. We still cannot decode the string after that job so I believe the implant has encrypted it before. I found this function in the source, it use chacha encryption:
+Mapping those characters back to the right one is not enough. We still cannot decode the string after that job so I believe that the implant has encrypted it before. I found this function in the source, it used chacha encryption:
 
-![](images/writeups/redline-htb/source2.png)
+{{< image src="images/writeups/redline-htb/source2.png" caption="Encryption" >}}
 
 At this point, decrypting the traffic is quite challenging for us since the key for the decryption is not in the packet. I decided to digging the blog deeper.
 
-![](images/writeups/redline-htb/blog2.png)
+{{< image src="images/writeups/redline-htb/blog2.png" caption="Recover session key" >}}
 
 As it said, the key we need is in the memory. Now we have enough informations to begin the decryption. I was too lazy to write scripts so I found a tool can do this job well: https://github.com/Immersive-Labs-Sec/SliverC2-Forensics
 
@@ -443,29 +443,29 @@ It is the blog's author's tool LMAO 😂
 
 First thing to do is extracting the encoded data from pcap.
 
-![](images/writeups/redline-htb/tool.png)
+{{< image src="images/writeups/redline-htb/tool.png" caption="Data" >}}
 
 We can use tshark for this thing:
 
-![](images/writeups/redline-htb/tshark.png)
+{{< image src="images/writeups/redline-htb/tshark.png" caption="tshark could do the job well" >}}
 
 To remove duplicated DNS query's name, you can filter the pcap to one IP.
 
-![](images/writeups/redline-htb/decrypt1.png)
+{{< image src="images/writeups/redline-htb/decrypt1.png" caption="Bruteforcing the key" >}}
 
 From here, we have known the right key was used so just use that key to speed up the decrypion instead of brute forcing.
 
-![](images/writeups/redline-htb/decrypt2.png)
+{{< image src="images/writeups/redline-htb/decrypt2.png" caption="Final data" >}}
 
 We got PDF's password here: `$_Ultr4_s3cur3_P@55W0rD!!_$`
 
 And here is a gzip file contains a PDF inside it:
 
-![](images/writeups/redline-htb/decrypt3.png)
+{{< image src="images/writeups/redline-htb/decrypt3.png" caption="Gzip file here guys" >}}
 
 Extract, decompress and open with the given password:
 
-![](images/writeups/redline-htb/flag.png)
+{{< image src="images/writeups/redline-htb/flag.png" caption="Flag is in the pdf" >}}
 
 Thank you for reading this.
 
