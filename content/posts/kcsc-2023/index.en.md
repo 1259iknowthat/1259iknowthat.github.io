@@ -28,7 +28,7 @@ This CTF event has been one of the greatest events in Viet Nam so far.
 
 My team got second place by chance in 8 hours. Time is short but we got so many works that need to be done, GGWP xD.
 
-![](images/writeups/kcsc/rank.png)
+{{< image src="images/writeups/kcsc/rank.png" caption="Rank" >}}
 
 ____
 
@@ -48,7 +48,7 @@ Let's extract the macro content by using `olevba` tool.
 
 Here is the content of it.
 
-![](images/writeups/kcsc/ole.png)
+{{< image src="images/writeups/kcsc/ole.png" caption="Source code" >}}
 
 We can see in the flag, it has `$phlac`. It looks like ps1 variable but there's no such a thing appear in the macro. Hmmmmm, sussy isn't it?
 
@@ -86,7 +86,7 @@ So, at this point, we will have two ways to continue the "investigation".
 
 First, we can run this macro with the newest version of Word in a virtual environment. 
 
-![](images/writeups/kcsc/meme.png)
+{{< image src="images/writeups/kcsc/meme.png" caption="yep" >}}
 
 
 Since the macro called powershell command, Windows has 90% chance can catch and store it in powershell evtx log file.
@@ -99,7 +99,7 @@ Since the macro called powershell command, Windows has 90% chance can catch and 
 
 Open Windows Powershell evtx, navigate to the nearest event which has ID 800.
 
-![](images/writeups/kcsc/pwsh.png)
+{{< image src="images/writeups/kcsc/pwsh.png" caption="Windows Event Log" >}}
 
 Now, you can decode the base64 string to get the real thing here.
 
@@ -112,19 +112,19 @@ print(base64.b64decode(s).decode('UTF-16LE'))
 
 Why I knew it's UTF-16LE? Here is why:
 
-![](images/writeups/kcsc/cyberchef.png)
+{{< image src="images/writeups/kcsc/cyberchef.png" caption="Cyberchef" >}}
 
 The second way, extract this file and look up some important pieces of information. We can use binwalk or a normal zip program to extract xml contents.
 
-![](images/writeups/kcsc/xml1.png)
+{{< image src="images/writeups/kcsc/xml1.png" caption="XML" >}}
 
 We got some macro's names here.
 
-![](images/writeups/kcsc/xml2.png)
+{{< image src="images/writeups/kcsc/xml2.png" caption="Sign" >}}
 
 Go to the `AlternateContent` tag in `document.xml`.
 
-![](images/writeups/kcsc/xml3.png)
+{{< image src="images/writeups/kcsc/xml3.png" caption="Malicious base64 string" >}}
 
 Concatenate two base64 strings then you'll have the malicious content.
 
@@ -142,9 +142,11 @@ When the macro executes this code, it will open a text box, a Youtube video. It 
 
 Last part of the flag:
 
-![](images/writeups/kcsc/flag1.png)
+{{< image src="images/writeups/kcsc/flag1.png" caption="Flag" >}}
 
-##### FLAG: KCSC{H1_1m_sUcky_Tr0ll_m4lw@r3_y0u_g0t_m3_ah1Hi}
+##### FLAG: 
+
+**KCSC{H1_1m_sUcky_Tr0ll_m4lw@r3_y0u_g0t_m3_ah1Hi}**
 
 ____
 
@@ -157,73 +159,76 @@ They give us an `evidence.vhdx`. If you want to load it to Autopsy like me, you 
 
 This is a disk image of Windows C's drive. 
 
-![](images/writeups/kcsc/info.png)
+{{< image src="images/writeups/kcsc/info.png" caption="Drive's information" >}}
 
 I looked up some deleted files and got this:
 
-![](images/writeups/kcsc/delete.png)
+{{< image src="images/writeups/kcsc/delete.png" caption="Deleted files" >}}
 
 Why have they been deleted?
 
 I tried looking up some useful information in the Users folder. John user gave me nothing but Public did :D
 
-![](images/writeups/kcsc/list.png)
+{{< image src="images/writeups/kcsc/list.png" caption="Suspicious file" >}}
 
 I will explain here a little bit before going further. Why do the ps1 file's name look strange?
 
 If you mount the image and navigate to this path `C\Users\Public\ChromeUpdate`, you will see there's only and just only one file.
 
-![](images/writeups/kcsc/readme.png)
+{{< image src="images/writeups/kcsc/readme.png" caption="" >}}
 
 The size is 0 bytes, just like Autopsy has shown.
 
-![](images/writeups/kcsc/property.png)
+{{< image src="images/writeups/kcsc/property.png" caption="ADS sign" >}}
 
 But why is the size on disk more than 600KB?
 
 This size is the same as Autopsy's result if you add the slack too.
 
-![](images/writeups/kcsc/autopsy.png)
+{{< image src="images/writeups/kcsc/autopsy.png" caption="ADS showed in Autopsy" >}}
 
-This "phenomenon" called **Alternate Data Stream (ADS)**
-
-https://www.malwarebytes.com/blog/news/2015/07/introduction-to-alternate-data-streams
+This "phenomenon" called **[Alternate Data Stream (ADS)](https://www.malwarebytes.com/blog/news/2015/07/introduction-to-alternate-data-streams)**
 
 Alternate Data Streams (ADS) is a file attribute only found on the NTFS file system. It allow files to contain more than one stream of data.
 
 So, how to open it?
 
-![](images/writeups/kcsc/dir.png)
+{{< image src="images/writeups/kcsc/dir.png" caption="ADS showed when using cmd" >}}
 
 You can use `dir` command with `/r` option to list it. As you can see, we have the hidden ps1 file now.
 
-Using `Get-Content E:\C\Users\Public\ChromeUpdate\readme.txt:twenty.ps1 > D:\Local-Lab\Workspace\kcsc\evidence\twenty.ps1` to get the file. 
+Using this
+
+```
+Get-Content E:\C\Users\Public\ChromeUpdate\readme.txt:twenty.ps1 > D:\Local-Lab\Workspace\kcsc\evidence\twenty.ps1
+``` 
+to get the file. 
 
 I tried to open the file but it's not a normal file.
 
-![](images/writeups/kcsc/header.png)
+{{< image src="images/writeups/kcsc/header.png" caption="CAB header" >}}
 
 At that time, after doing a search about MSCF header, I got this:
 
-![](images/writeups/kcsc/search.png)
+{{< image src="images/writeups/kcsc/search.png" caption="" >}}
 
 So it's a cabinet file ([Documents](https://learn.microsoft.com/en-us/windows/win32/msi/cabinet-files)). We can use `cabextract` on linux to extract it's content.
 
-![](images/writeups/kcsc/error.png)
+{{< image src="images/writeups/kcsc/error.png" caption="Error when dumping the file out" >}}
 
 Somehow, I got an error when trying to extract it. When I tried using the file from Autopsy and got succeeded :D?
 
-![](images/writeups/kcsc/ok.png)
+{{< image src="images/writeups/kcsc/ok.png" caption="" >}}
 
 Let's analyze the ps1 file. 
 
 The powershell script is just about AES encryption with given key and IV.
 
-![](images/writeups/kcsc/aes.png)
+{{< image src="images/writeups/kcsc/aes.png" caption="" >}}
 
 Here is the key and ciphertext.
 
-![](images/writeups/kcsc/main.png)
+{{< image src="images/writeups/kcsc/main.png" caption="Code flow" >}}
 
 The code above splits the first 16 bytes of ciphertext as the IV. After that, it will write decrypt data as a gzip file.
 
@@ -247,11 +252,11 @@ for i in range(1,50):
         # print(key)
 
         if len(res[0]) > len(res[1]): 
-            key = res[1].replace("FromBase64String(\"","").strip(res[1][-2:])
-            text = res[0].replace("FromBase64String(\"","").strip(res[0][-2:])
+key = res[1].replace("FromBase64String(\"","").strip(res[1][-2:])
+text = res[0].replace("FromBase64String(\"","").strip(res[0][-2:])
         else:
-            key = res[0].replace("FromBase64String(\"","").strip(res[0][-2:])
-            text = res[1].replace("FromBase64String(\"","").strip(res[1][-2:])
+key = res[0].replace("FromBase64String(\"","").strip(res[0][-2:])
+text = res[1].replace("FromBase64String(\"","").strip(res[1][-2:])
 
         print(key,end=' ')
         key = base64.b64decode(key)
@@ -263,15 +268,15 @@ for i in range(1,50):
         header = bytes.fromhex('1F8B0800000000000400')
         
         if '[System.Security.Cryptography.CipherMode]::CBC' in f:
-            print('CBC')
-            cipher = AES.new(key, AES.MODE_CBC, iv)
+print('CBC')
+cipher = AES.new(key, AES.MODE_CBC, iv)
         elif '[System.Security.Cryptography.CipherMode]::ECB' in f:
-            print('ECB')
-            cipher = AES.new(key, AES.MODE_ECB)
+print('ECB')
+cipher = AES.new(key, AES.MODE_ECB)
 
         data = cipher.decrypt(ct)
         if header not in data:
-            data = header + data
+data = header + data
         out = open(f'test-{i+1}.gz','wb')
         # print(data)
         out.write(data)
@@ -284,18 +289,19 @@ for i in range(1,50):
 
 While I was decrypting, at some ps1 files, it's not GzipStream but it is DeflateStream, when you tried decrypting, gzip file will be missing the signature. So I decided to add it to the script.
 
-![](images/writeups/kcsc/gzip.png)
+{{< image src="images/writeups/kcsc/gzip.png" caption="Log" >}}
 
 Twenty decryption has been run, I see that's why the author named it twenty.ps1 ¯\\\_(ツ)_/¯
 
-![](images/writeups/kcsc/mal.png)
+{{< image src="images/writeups/kcsc/mal.png" caption="Final script block" >}}
 
 The last file was another ps1 with base64 strings in it. Decode those, you will get pictures with flag in one of them.
 
-![](images/writeups/kcsc/flag2.jpg)
+{{< image src="images/writeups/kcsc/flag2.jpg" caption="Flag" >}}
 
-##### FLAG: KCSC{Som3one's_thr0ugh1s_KMA_don't_have_researcher?}
+##### FLAG: 
 
+**KCSC{Som3one's_thr0ugh1s_KMA_don't_have_researcher?}**
 
 ____
 
@@ -303,46 +309,46 @@ ____
 ## Action Capture
 
 {{< admonition >}}
-            I know all what you type and click
+I know all what you type and click
 {{< /admonition >}}
 
 Sound like a keylogger 	凸(￣ヘ￣)
 
 The challenge give us a pcap file. Let's see what's inside.
 
-![](images/writeups/kcsc/pcap.png)
+{{< image src="images/writeups/kcsc/pcap.png" caption="Wireshark Log" >}}
 
 There're two protocols that we need to pay attention to: `TCP` and `ICMP`.
 
 Followed TCP stream then I got this:
 
-![](images/writeups/kcsc/tcp.png)
+{{< image src="images/writeups/kcsc/tcp.png" caption="TCP Log" >}}
 
 So this is a capture of a linux session. We can see linux commands like `whoami`, `id` and the most important is `xinput`.
 
-![](images/writeups/kcsc/xinput.png)
+{{< image src="images/writeups/kcsc/xinput.png" caption="xinput log" >}}
 
 Looks like hacker trying to exfiltrate keyboard event with xinput and ping command.
 
-![](images/writeups/kcsc/key.png)
+{{< image src="images/writeups/kcsc/key.png" caption="Suspicious command" >}}
 
 TCP's second stream contains exfiltrating phase by dumping mouse movement in hex format then exfiltrating it with ping again.
 
-![](images/writeups/kcsc/mouse.png)
+{{< image src="images/writeups/kcsc/mouse.png" caption="" >}}
 
 Let's take a look in ICMP packets.
 
-![](images/writeups/kcsc/ping1.png)
+{{< image src="images/writeups/kcsc/ping1.png" caption="There're so many ICMP packets" >}}
 
-![](images/writeups/kcsc/ping2.png)
+{{< image src="images/writeups/kcsc/ping2.png" caption="Yep too much" >}}
 
-![](images/writeups/kcsc/ping3.png)
+{{< image src="images/writeups/kcsc/ping3.png" caption="Payload is not normal" >}}
 
 Exfiltrate data has been shown clearly in ICMP packets' data field. At this point, we need to know how xinput works to recover the data.
 
-![](images/writeups/kcsc/keytest.png)
+{{< image src="images/writeups/kcsc/keytest.png" caption="Testing command in local" >}}
 
-![](images/writeups/kcsc/mousetest.png)
+{{< image src="images/writeups/kcsc/mousetest.png" caption="Output" >}}
 
 Hmmmm interesting.
 
@@ -384,15 +390,14 @@ for i in lst:
 
 Exfiltrated data here:
 
-![](images/writeups/kcsc/data1.png)
+{{< image src="images/writeups/kcsc/data1.png" caption="Keyboard captured" >}}
 
-![](images/writeups/kcsc/data2.png)
+{{< image src="images/writeups/kcsc/data2.png" caption="Mouse movement" >}}
 
 
 For keyboard, I found a script online: https://github.com/Wh1t3Rh1n0/xinput-keylog-decoder
 
 But I only use its keymap, here is my own script:
-
 
 ```py
 keymap = {9: '<ESC>', 67: '<F1>', 68: '<F2>', 69: '<F3>', 70: '<F4>', 71: '<F5>', 72: '<F6>', 73: '<F7>', 74: '<F8>', 75: '<F9>', 76: '<F10>', 95: '<F11>', 96: '<F12>', 118: '<INS>', 119: '<DEL>', 49: '`', 10: '1', 11: '2', 12: '3', 13: '4', 14: '5', 15: '6', 16: '7', 17: '8', 18: '9', 19: '0', 20: '-', 21: '=', 22: '<BACKSPACE>', 23: '<TAB>', 24: 'q', 25: 'w', 26: 'e', 27: 'r', 28: 't', 29: 'y', 30: 'u', 31: 'i', 32: 'o', 33: 'p', 34: '[', 35: ']', 51: '\\', 66: '<CAPSLOCK>', 38: 'a', 39: 's', 40: 'd', 41: 'f', 42: 'g', 43: 'h', 44: 'j', 45: 'k', 46: 'l', 47: ';', 48: "'", 36: '<ENTER>', 52: 'z', 53: 'x', 54: 'c', 55: 'v', 56: 'b', 57: 'n', 58: 'm', 59: ',', 60: '.', 61: '/', 65: '<SPACE>', 111: '<UPARROW>', 113: '<LEFTARROW>', 116: '<DOWNARROW>', 114: '<RIGHTARROW>', 110: '<HOME>', 115: '<END>', 112: '<PGUP>', 117: '<PGDN>', 77: '<NUMLOCK>', 106: '<NUM/>', 63: '<NUM*>', 82: '<NUM->', 79: '<NUM7>', 80: '<NUM8>', 81: '<NUM9>', 83: '<NUM4>', 84: '<NUM5>', 85: '<NUM6>', 86: '<NUM+>', 87: '<NUM1>', 88: '<NUM2>', 89: '<NUM3>', 90: '<NUM0>', 91: '<NUM.>', 104: '<NUMENTER>', 134: '<RWIN>', 133: '<LWIN>'}
@@ -409,10 +414,10 @@ print(lst)
 for i in lst:
     if keymap.get(int(i)):
         if keymap[int(i)] == '<SPACE>':
-            print(' ',end='')
+print(' ',end='')
         else:
-            print(keymap[int(i)],end='')
-            
+print(keymap[int(i)],end='')
+
 flag = [75,67,83,67,123,103,48,48,100,95,108,117,99,107,95]
 print()
 for i in flag:
@@ -457,7 +462,9 @@ plt.show()
 Last part of the flag:
 
 
-![](images/writeups/kcsc/flag3.png)
+{{< image src="images/writeups/kcsc/flag3.png" caption="Flag" >}}
 
 
-##### FLAG: KCSC{g00d_luck_have_fuN_1337}
+##### FLAG: 
+
+**KCSC{g00d_luck_have_fuN_1337}**
