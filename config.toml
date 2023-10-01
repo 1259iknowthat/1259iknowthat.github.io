@@ -738,7 +738,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         pre = "<i class='fab fa-solid fa-music fa-fw' aria-hidden='true'></i>"
         post = ""
         name = ""
-        url = "https://open.spotify.com/track/640cOeje6h9PHYEBNnlXFw?si=a065f42b6adf46ee"
+        url = "https://open.spotify.com/track/0F2KpZK9zEalmioj3rgRun?si=0a18d33b1d6a4aee"
         title = "Music"
     [languages.en.params]
       [languages.en.params.search]
@@ -766,5 +766,81 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
           social = true
           disclaimer = ""
       [languages.en.params.social]
+        GitHub = "1259iknowthat"
+        Twitter = "1259iknowthat"
+  
+  [languages.vn]
+    weight = 1
+    languageCode = "vn"
+    languageName = "Vietnamese"
+    hasCJKLanguage = false
+    copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+    [languages.vn.menu]
+      [[languages.vn.menu.main]]
+        weight = 1
+        identifier = "posts"
+        pre = ""
+        post = ""
+        name = "Posts"
+        url = "/posts/"
+        title = ""
+      [[languages.vn.menu.main]]
+        weight = 2
+        identifier = "tags"
+        pre = ""
+        post = ""
+        name = "Tags"
+        url = "/tags/"
+        title = ""
+      [[languages.vn.menu.main]]
+        weight = 3
+        identifier = "categories"
+        pre = ""
+        post = ""
+        name = "Categories"
+        url = "/categories/"
+        title = ""
+      [[languages.vn.menu.main]]
+        weight = 5
+        identifier = "about"
+        pre = ""
+        post = ""
+        name = "About"
+        url = "/about/"
+        title = ""
+      [[languages.vn.menu.main]]
+        weight = 6
+        identifier = "music"
+        pre = "<i class='fab fa-solid fa-music fa-fw' aria-hidden='true'></i>"
+        post = ""
+        name = ""
+        url = "https://open.spotify.com/track/0F2KpZK9zEalmioj3rgRun?si=0a18d33b1d6a4aee"
+        title = "Music"
+    [languages.vn.params]
+      [languages.vn.params.search]
+        enable = true
+        type = "algolia"
+        contentLength = 4000
+        placeholder = ""
+        maxResultLength = 10
+        snippetLength = 30
+        highlightTag = "em"
+        absoluteURL = false
+        [languages.vn.params.search.algolia]
+          index = "index.vn"
+          appID = "PASDMWALPK"
+          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
+      [languages.vn.params.home]
+        rss = 10
+        [languages.vn.params.home.profile]
+          enable = true
+          gravatarEmail = ""
+          avatarURL = "/images/avatar.png"
+          title = ""
+          subtitle = "Defend Smarter, Not Harder"
+          typeit = true
+          social = true
+          disclaimer = ""
+      [languages.vn.params.social]
         GitHub = "1259iknowthat"
         Twitter = "1259iknowthat"
