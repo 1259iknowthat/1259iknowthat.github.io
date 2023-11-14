@@ -18,7 +18,7 @@ lightgallery: true
 
 ### Contacts:
 
-* Twitter: [@1259iknowthat](https://twitter.com/1259iknowthat)
-* Discord: [1259iknowthat#1337](https://discord.com/users/496308605918773248)
+* Twitter: [@tr4c3datr4il](https://twitter.com/tr4c3datr4il)
+* Discord: [tr4c3datr4il](https://discord.com/users/496308605918773248)
 
 If you find something wrong or mismatch, please contact me soon.
