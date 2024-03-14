@@ -1,4 +1,4 @@
-baseURL = 'http://1259iknowthat.github.io/'
+baseURL = 'http://tr4c3datr4il.github.io/'
 languageCode = 'en-us'
 title = 'DFIR with Noob'
 theme = 'loveit'
@@ -28,7 +28,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 # Author config
 
 [author]
-  name = "1259iknowthat"
+  name = "tr4c3datr4il"
   email = ""
   link = ""
 
@@ -262,8 +262,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # Social config in home page
   
   [params.social]
-    GitHub = "https://github.com/1259iknowthat"
-    Twitter = "https://twitter.com/1259iknowthat"
+    GitHub = "https://github.com/tr4c3datr4il"
+    Twitter = "https://twitter.com/tr4c3datr4il"
 
   # Page global config
   
@@ -766,8 +766,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
           social = true
           disclaimer = ""
       [languages.en.params.social]
-        GitHub = "1259iknowthat"
-        Twitter = "1259iknowthat"
+        GitHub = "tr4c3datr4il"
+        Twitter = "tr4c3datr4il"
   
   [languages.vn]
     weight = 1
@@ -842,6 +842,6 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
           social = true
           disclaimer = ""
       [languages.vn.params.social]
-        GitHub = "1259iknowthat"
-        Twitter = "1259iknowthat"
+        GitHub = "tr4c3datr4il"
+        Twitter = "tr4c3datr4il"
         

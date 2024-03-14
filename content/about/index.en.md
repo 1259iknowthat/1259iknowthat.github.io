@@ -10,11 +10,11 @@ lightgallery: true
 
 ## ❓ Stupid things about me which may interesting for you.
 
-### I'm just a boy who is interested in DFIR. I'm also a Forensics/Misc player.
+### I'm just a guy who is interested in DFIR. I'm also a Forensics/Misc player.
 
 * From University of Information Technology - Vietnam National University HCM 🎓
 * From [InsecLab](https://inseclab.uit.edu.vn/) with luv 😘
-* From [Green Onions](https://ctftime.org/team/194346) a.k.a [m1cr0$oft 0ff1c3](https://ctftime.org/team/194346) team 🧅
+* From [Green Onions](https://ctftime.org/team/194346) a.k.a [TheRoundTable](https://ctftime.org/team/194346) team 🧅
 
 ### Contacts:
 
