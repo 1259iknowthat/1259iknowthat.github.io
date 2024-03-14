@@ -22,7 +22,7 @@ Some Forensics challenges in HTB Cyber Apocalypse 2024
 
 <!--more-->
 
-### Preface
+## Preface
 
 Hi guys, it's me again. It's been a while since I wrote writeups. University's projects, CTF events, ..., I'm currently up to my neck right now. ~~But the most important thing is that I'm lazy.~~ Anyway, I have participated in Hack The Box Cyber Apocalypse: Hacker Royale this weekend with WannaW1n. It's a big event in March 2024 and a fun event to begin as a beginner. Because ~~I'm lazy~~ I don't have much time so I will write about 4 last challenges of Forensics. Here we go...
 
@@ -30,7 +30,7 @@ Hi guys, it's me again. It's been a while since I wrote writeups. University's p
 
 ____
 
-### Data Siege
+## Data Siege
 
 {{< admonition >}}
 It was a tranquil night in the Phreaks headquarters, when the entire district erupted in chaos. Unknown assailants, rumored to be a rogue foreign faction, have infiltrated the city's messaging system and critical infrastructure. Garbled transmissions crackle through the airwaves, spewing misinformation and disrupting communication channels. We need to understand which data has been obtained from this attack to reclaim control of the and communication backbone. Note: flag is splitted in three parts.
@@ -172,7 +172,7 @@ Combining three parts of the flag, we will get the final flag.
 
 ____
 
-### Game Invitation
+## Game Invitation
 
 {{< admonition >}}
 In the bustling city of KORP™, where factions vie in The Fray, a mysterious game emerges. As a seasoned faction member, you feel the tension growing by the minute. Whispers spread of a new challenge, piquing both curiosity and wariness. Then, an email arrives: "Join The Fray: Embrace the Challenge." But lurking beneath the excitement is a nagging doubt. Could this invitation hide something more sinister within its innocent attachment?
@@ -290,7 +290,7 @@ The final flag is in that script too!
 
 ____
 
-### Confinement
+## Confinement
 
 {{< admonition >}}
 Our clan's network has been infected by a cunning ransomware attack, encrypting irreplaceable data essential for our relentless rivalry with other factions. With no backups to fall back on, we find ourselves at the mercy of unseen adversaries, our fate uncertain. Your expertise is the beacon of hope we desperately need to unlock these encrypted files and reclaim our destiny in The Fray.
@@ -459,7 +459,7 @@ The flag is in that Excel file.
 
 ____
 
-### Oblique Final
+## Oblique Final
 
 {{< admonition >}}
 As the days for the final round of the game, draw near, rumors are beginning to spread that one faction in particular has rigged the final! In the meeting with your team, you discuss that if the game is indeed rigged, then there can be no victory here... Suddenly, one team player barged in carrying a Windows Laptop and said they found it in some back room in the game Architects' building just after the faction had left! As soon as you open it up it turns off due to a low battery! You explain to the rest of your team that the Legionnaires despise anything unethical and if you expose them and go to them with your evidence in hand, then you surely end up being their favorite up-and-coming faction. "Are you Ready To Run with the Wolves?!"
