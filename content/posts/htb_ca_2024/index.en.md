@@ -24,7 +24,7 @@ Some Forensics challenges in HTB Cyber Apocalypse 2024
 
 ## Preface
 
-Hi guys, it's me again. It's been a while since I wrote writeups. University's projects, CTF events, ..., I'm currently up to my neck right now. ~~But the most important thing is that I'm lazy.~~ Anyway, I have participated in Hack The Box Cyber Apocalypse: Hacker Royale this weekend with WannaW1n. It's a big event in March 2024 and a fun event to begin as a beginner. Because ~~I'm lazy~~ I don't have much time so I will write about 4 last challenges of Forensics. Here we go...
+Hi guys, it's me again. It's been a while since I've written writeups. University's projects, CTF events, ..., I'm currently up to my neck right now. ~~But the most important thing is that I'm lazy.~~ Anyway, I have participated in Hack The Box Cyber Apocalypse: Hacker Royale this weekend with WannaW1n. It's a big event in March 2024 and a fun event to begin as a beginner. Because ~~I'm lazy~~ I don't have much time so I will write about 4 last challenges of Forensics. Here we go...
 
 {{< image src="images/writeups/htb_ca_2024/foren.png" caption="Figure" >}}
 
@@ -383,7 +383,7 @@ $ exit
 
 After getting a connection from the victim, TA continue downloading a password-protected zip file named `intel.zip`. He decompressed the file and ran some executables in it. One is the `browser-pw-decrypt.exe`, maybe this is for browser's credentials extraction. Another one is `intel.exe`, I guess this is the ransomware. `./mimikatz.exe` is used to extract LSASS secret and `fscan64.exe` maybe for connection scanning? When finished, the attacker deleted all of the associated files which make us likely have no chance to obtain the malware.
 
-Now the question is: Where is the intel.zip? We have known that the attacker had erased it from the system. BUT, before running those executables, TA ran some commands to disable the Windows Defender! From this point, we can actually recover the ransomware if it was quarantined by the Defender. Let's check the Windows Defender folder.
+Now the question is: Where is the intel.zip? We have known that the attacker had erased it from the system. BUT, before running those executables again, TA ran some commands to disable the Windows Defender! From this point, we can actually recover the ransomware if it was quarantined by the Defender. Let's check the Windows Defender folder.
 
 {{< image src="images/writeups/htb_ca_2024/defender.png" caption="Defender directory" >}}
 
