@@ -22,3 +22,6 @@ lightgallery: true
 * Discord: [tr4c3datr4il](https://discord.com/users/496308605918773248)
 
 If you find something wrong or mismatch, please contact me soon.
+
+
+{{< image src="https://tenor.com/view/hatsune-miku-anime-vocaloid-lamazep-dance-gif-16231326" >}}
