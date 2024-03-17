@@ -298,7 +298,7 @@ Our clan's network has been infected by a cunning ransomware attack, encrypting 
 Note: The valuable data is stored under \Documents\Work
 {{< /admonition >}}
 
-This is a challenge from @bquanman my idol 🥰
+This is a challenge from {{< person url="https://discord.com/users/594612332232048651" nick="bquanman" picture="https://cdn.discordapp.com/avatars/594612332232048651/223e413c1d0b4191a04d26eb094d4aaf" >}} my idol 🥰
 
 Moving on to this challenge, we will meet a ransomware. Just like other similar cases, we will have to decrypt the encrypted files if possible. But first, let's find the threat.
 

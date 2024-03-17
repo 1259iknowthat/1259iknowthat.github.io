@@ -828,8 +828,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         absoluteURL = false
         [languages.vn.params.search.algolia]
           index = "index.vn"
-          appID = "PASDMWALPK"
-          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
+          appID = "XG3ADSM4ZT"
+          searchKey = "d4b496ae2214c0c60a907b20b7c2485e"
       [languages.vn.params.home]
         rss = 10
         [languages.vn.params.home.profile]
