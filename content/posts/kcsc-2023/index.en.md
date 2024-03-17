@@ -4,7 +4,7 @@ title: "KCSC CTF 2023"
 date: 2023-05-17T17:55:28+08:00
 lastmod: 2023-05-17T17:55:28+08:00
 draft: false
-author: "1259iknowthat"
+author: "tr4c3datr4il"
 description: "Some Forensics challenges in KCSC CTF 2023"
 images: []
 resources:
@@ -93,7 +93,7 @@ Since the macro called powershell command, Windows has 90% chance can catch and 
 
 <figure class="video_container">
   <video width="640" height="480" controls="true" allowfullscreen="true">
-    <source src="https://github.com/1259iknowthat/1259iknowthat.github.io/raw/master/videos/Malware-Behaviour.mkv" type="video/mp4">
+    <source src="https://github.com/tr4c3datr4il/tr4c3datr4il.github.io/raw/master/videos/Malware-Behaviour.mkv" type="video/mp4">
   </video>
 </figure>
 

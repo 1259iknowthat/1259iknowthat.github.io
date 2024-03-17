@@ -4,14 +4,14 @@ title: "UIU CTF 2023"
 date: 2023-07-04T17:55:28+08:00
 lastmod: 2023-07-04T17:55:28+08:00
 draft: false
-author: "1259iknowthat"
+author: "tr4c3datr4il"
 description: "Some Misc challenges from UIU CTF 2023 🪟"
 images: []
 resources:
 - name: "featured-image"
   src: "featured-image.png"
 
-tags: ["Misc"]
+tags: ["Misc", "jail"]
 categories: ["WriteUps"]
 
 twemoji: false

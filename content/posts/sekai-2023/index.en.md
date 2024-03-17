@@ -4,7 +4,7 @@ title: "SEKAI CTF 2023"
 date: 2023-08-29T17:55:28+08:00
 lastmod: 2023-08-29T17:55:28+08:00
 draft: false
-author: "1259iknowthat"
+author: "tr4c3datr4il"
 description: "Full Forensics challenges from SEKAI CTF 2023 🌸"
 images: []
 resources:

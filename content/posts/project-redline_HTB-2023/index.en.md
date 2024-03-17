@@ -4,14 +4,14 @@ title: "Discover injecting implant by using memory forensics technique - Project
 date: 2023-07-17T17:55:28+08:00
 lastmod: 2023-07-17T17:55:28+08:00
 draft: false
-author: "1259iknowthat"
+author: "tr4c3datr4il"
 description: "A Forensics challenge from HTB Business 2023"
 images: []
 resources:
 - name: "featured-image"
   src: "featured-image.png"
 
-tags: ["Forensics","C2 Analysis"]
+tags: ["Forensics","C2"]
 categories: ["WriteUps"]
 
 twemoji: false

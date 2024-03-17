@@ -4,7 +4,7 @@ title: "Pico CTF 2023"
 date: 2023-04-04T17:55:28+08:00
 lastmod: 2022-05-13T17:55:28+08:00
 draft: false
-author: "1259iknowthat"
+author: "tr4c3datr4il"
 description: "Full Forensics challenges write-ups from Pico CTF 2023"
 images: []
 resources:

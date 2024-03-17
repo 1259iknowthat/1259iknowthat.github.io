@@ -11,7 +11,7 @@ resources:
 - name: "featured-image"
   src: "featured-image.png"
 
-tags: ["Forensics"]
+tags: ["Forensics", "C2"]
 categories: ["WriteUps"]
 
 twemoji: false

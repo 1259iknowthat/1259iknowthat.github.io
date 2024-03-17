@@ -4,7 +4,7 @@ title: "README 2022"
 date: 2022-09-05T17:55:28+08:00
 lastmod: 2022-05-13T17:55:28+08:00
 draft: false
-author: "1259iknowthat"
+author: "tr4c3datr4il"
 description: "A small misc challenge from CakeCTF 2022 🎂"
 images: []
 resources:
