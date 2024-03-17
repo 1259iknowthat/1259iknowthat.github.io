@@ -24,4 +24,4 @@ lightgallery: true
 If you find something wrong or mismatch, please contact me soon.
 
 
-{{< image src="https://tenor.com/view/hatsune-miku-anime-vocaloid-lamazep-dance-gif-16231326" >}}
+{{< figure src="https://media.tenor.com/frOcV2JCvgsAAAAi/hatsune-miku-anime.gif" >}}
